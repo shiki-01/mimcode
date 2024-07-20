@@ -1,6 +1,8 @@
 {
-  "parent": "minecraft:block/block",
+  "parent": "minecraft:block/cube_bottom_top",
   "textures": {
-    "all": "minecord:block/mine_cord"
+    "bottom": "minecord:block/mine_cord",
+    "side": "minecord:block/mine_cord",
+    "top": "minecord:block/mine_cord_td"
   }
 }

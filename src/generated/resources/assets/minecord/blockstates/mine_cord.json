@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "minecord:block/mine_cord"
+    }
+  }
+}

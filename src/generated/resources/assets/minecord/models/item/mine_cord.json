@@ -1,6 +1,3 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "minecord:item/mine_cord"
-  }
+  "parent": "minecord:block/mine_cord"
 }

@@ -4,6 +4,7 @@ import com.shiki01.minecord.MineCord;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraft.data.DataGenerator;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 public class MineCordItemModelProvider extends ItemModelProvider {
@@ -13,7 +14,7 @@ public class MineCordItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        this.withExistingParent("minecord:item/mine_cord", mcLoc("item/generated"))
-            .texture("layer0", new ResourceLocation("minecord:item/mine_cord"));
+        this.getBuilder("mine_cord")
+                .parent(new ModelFile.UncheckedModelFile(modLoc("block/mine_cord")));
     }
 }
