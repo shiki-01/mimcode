@@ -1,7 +1,23 @@
 {
   "variants": {
-    "": {
-      "model": "minecord:block/mine_cord"
+    "facing=east": {
+      "model": "minecord:block/mine_cord",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "minecord:block/mine_cord",
+      "uvlock": true
+    },
+    "facing=south": {
+      "model": "minecord:block/mine_cord",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=west": {
+      "model": "minecord:block/mine_cord",
+      "uvlock": true,
+      "y": 270
     }
   }
 }

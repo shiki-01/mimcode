@@ -15,7 +15,7 @@ public class MineCordBlockModelProvider extends BlockModelProvider {
     protected void registerModels() {
         this.withExistingParent("mine_cord", mcLoc("block/cube_bottom_top"))
                 .texture("side", modLoc("block/mine_cord"))
-                .texture("top", modLoc("block/mine_cord_td"))
-                .texture("bottom", modLoc("block/mine_cord"));
+                .texture("top", modLoc("block/mine_cord_td_north"))
+                .texture("bottom", modLoc("block/mine_cord_td_north"));
     }
 }
