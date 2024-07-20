@@ -2,7 +2,6 @@ package com.shiki01.minecord.provider;
 
 import com.shiki01.minecord.MineCord;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.model.generators.BlockModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
@@ -13,9 +12,16 @@ public class MineCordBlockModelProvider extends BlockModelProvider {
 
     @Override
     protected void registerModels() {
-        this.withExistingParent("mine_cord", mcLoc("block/cube_bottom_top"))
+        createOrientedBlock("north");
+        createOrientedBlock("south");
+        createOrientedBlock("east");
+        createOrientedBlock("west");
+    }
+
+    private void createOrientedBlock(String direction) {
+        this.withExistingParent("mine_cord_" + direction, mcLoc("block/cube_bottom_top"))
                 .texture("side", modLoc("block/mine_cord"))
-                .texture("top", modLoc("block/mine_cord_td_north"))
-                .texture("bottom", modLoc("block/mine_cord_td_north"));
+                .texture("top", modLoc("block/mine_cord_td"))
+                .texture("bottom", modLoc("block/mine_cord_td"));
     }
 }

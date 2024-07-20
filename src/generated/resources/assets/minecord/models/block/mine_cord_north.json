@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "minecord:block/mine_cord_td_north",
+    "side": "minecord:block/mine_cord",
+    "top": "minecord:block/mine_cord_td_north"
+  }
+}

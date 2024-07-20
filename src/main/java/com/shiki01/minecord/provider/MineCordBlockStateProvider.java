@@ -16,11 +16,11 @@ public class MineCordBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        models().cubeAll("mine_cord", modLoc("block/mine_cord"));
         getVariantBuilder(MineCordBlocks.MINE_CORD.get()).forAllStates(state -> {
             Direction dir = state.getValue(HorizontalDirectionalBlock.FACING);
+            String modelName = "mine_cord_" + dir.getName().toLowerCase();
             return ConfiguredModel.builder()
-                    .modelFile(models().getExistingFile(modLoc("block/mine_cord")))
+                    .modelFile(models().getExistingFile(modLoc(modelName)))
                     .rotationY(getYRotation(dir))
                     .uvLock(true)
                     .build();
