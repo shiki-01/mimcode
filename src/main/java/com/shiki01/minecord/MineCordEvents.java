@@ -1,5 +1,7 @@
 package com.shiki01.minecord;
 
+import com.shiki01.minecord.client.gui.MineCordGuiScreen;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -20,12 +22,14 @@ public class MineCordEvents {
 
     public static void register(IEventBus eventBus) {
         FMLJavaModLoadingContext.get().getModEventBus().register(MineCordEvents.class);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(MineCordEvents::onClientSetup);
     }
 
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             MINECORD_TAB.setRecipeFolderName("minecord");
+            MenuScreens.register(MineCordContainer.MINE_CORD_CONTAINER.get(), MineCordGuiScreen::new);
         });
     }
 }
