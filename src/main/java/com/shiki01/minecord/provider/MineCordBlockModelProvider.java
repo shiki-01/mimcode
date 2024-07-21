@@ -12,16 +12,16 @@ public class MineCordBlockModelProvider extends BlockModelProvider {
 
     @Override
     protected void registerModels() {
-        createOrientedBlock("north");
-        createOrientedBlock("south");
-        createOrientedBlock("east");
-        createOrientedBlock("west");
+        this.withExistingParent("mine_cord" , mcLoc("block/cube_bottom_top"))
+                .texture("side", modLoc("block/mine_cord"))
+                .texture("top", modLoc("block/mine_cord_td"))
+                .texture("bottom", modLoc("block/mine_cord_td"));
     }
 
     private void createOrientedBlock(String direction) {
         this.withExistingParent("mine_cord_" + direction, mcLoc("block/cube_bottom_top"))
                 .texture("side", modLoc("block/mine_cord"))
-                .texture("top", modLoc("block/mine_cord_td"))
-                .texture("bottom", modLoc("block/mine_cord_td"));
+                .texture("top", modLoc("block/mine_cord_td_" + direction))
+                .texture("bottom", modLoc("block/mine_cord_td_" + direction));
     }
 }

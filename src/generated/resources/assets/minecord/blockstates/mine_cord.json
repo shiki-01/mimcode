@@ -1,23 +1,19 @@
 {
   "variants": {
     "facing=east": {
-      "model": "minecord:block/mine_cord_east",
-      "uvlock": true,
-      "y": 90
+      "model": "minecord:block/mine_cord",
+      "y": 270
     },
     "facing=north": {
-      "model": "minecord:block/mine_cord_north",
-      "uvlock": true
-    },
-    "facing=south": {
-      "model": "minecord:block/mine_cord_south",
-      "uvlock": true,
+      "model": "minecord:block/mine_cord",
       "y": 180
     },
+    "facing=south": {
+      "model": "minecord:block/mine_cord"
+    },
     "facing=west": {
-      "model": "minecord:block/mine_cord_west",
-      "uvlock": true,
-      "y": 270
+      "model": "minecord:block/mine_cord",
+      "y": 90
     }
   }
 }

@@ -1,9 +1,6 @@
 package com.shiki01.minecord;
 
-import com.shiki01.minecord.provider.MineCordBlockModelProvider;
-import com.shiki01.minecord.provider.MineCordBlockStateProvider;
-import com.shiki01.minecord.provider.MineCordItemModelProvider;
-import com.shiki01.minecord.provider.MineCordLangProvider;
+import com.shiki01.minecord.provider.*;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
@@ -28,6 +25,7 @@ public class MineCord {
         gen.addProvider(event.includeClient(),new MineCordBlockStateProvider(gen, event.getExistingFileHelper()));
         gen.addProvider(event.includeClient(),new MineCordBlockModelProvider(gen, event.getExistingFileHelper()));
         gen.addProvider(event.includeClient(),new MineCordItemModelProvider(gen, event.getExistingFileHelper()));
+        gen.addProvider(event.includeClient(),new MineCordRecipeProvider(gen));
         gen.addProvider(event.includeClient(),new MineCordLangProvider.MineCordLangEn(gen));
         gen.addProvider(event.includeClient(),new MineCordLangProvider.MineCordLangJa(gen));
     }
