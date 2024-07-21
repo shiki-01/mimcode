@@ -17,11 +17,4 @@ public class MineCordBlockModelProvider extends BlockModelProvider {
                 .texture("top", modLoc("block/mine_cord_td"))
                 .texture("bottom", modLoc("block/mine_cord_td"));
     }
-
-    private void createOrientedBlock(String direction) {
-        this.withExistingParent("mine_cord_" + direction, mcLoc("block/cube_bottom_top"))
-                .texture("side", modLoc("block/mine_cord"))
-                .texture("top", modLoc("block/mine_cord_td_" + direction))
-                .texture("bottom", modLoc("block/mine_cord_td_" + direction));
-    }
 }

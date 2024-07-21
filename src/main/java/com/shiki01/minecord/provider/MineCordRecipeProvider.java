@@ -8,6 +8,7 @@ import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
@@ -16,8 +17,9 @@ public class MineCordRecipeProvider extends RecipeProvider {
         super(generator);
     }
 
-    protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
-        ShapedRecipeBuilder.shaped(MineCordBlocks.MINE_CORD.get(), 2)
+    @Override
+    protected void buildCraftingRecipes(@NotNull Consumer<FinishedRecipe> consumer) {
+        ShapedRecipeBuilder.shaped(MineCordBlocks.MINE_CORD.get(), 1)
                 .pattern("SSS")
                 .pattern("SIS")
                 .pattern("SSS")
