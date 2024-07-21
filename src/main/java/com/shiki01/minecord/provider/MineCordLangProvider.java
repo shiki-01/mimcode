@@ -18,7 +18,7 @@ public abstract class MineCordLangProvider extends LanguageProvider {
         @Override
         protected void addTranslations() {
             this.add(MineCordBlocks.MINE_CORD.get(), "Mine Cord");
-            this.add("itemGroup.minecord", "Mine Cord");
+            this.add("itemGroup.minecord_tab", "Mine Cord");
         }
     }
 
@@ -29,8 +29,8 @@ public abstract class MineCordLangProvider extends LanguageProvider {
 
         @Override
         protected void addTranslations() {
-            this.add(MineCordBlocks.MINE_CORD.get(), "マインコード");
-            this.add("itemGroup.minecord", "マインコード");
+            this.add(MineCordBlocks.MINE_CORD.get(), "Mine Cord");
+            this.add("itemGroup.minecord_tab", "Mine Cord");
         }
     }
 }

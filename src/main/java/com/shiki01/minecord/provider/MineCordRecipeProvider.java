@@ -20,12 +20,15 @@ public class MineCordRecipeProvider extends RecipeProvider {
     @Override
     protected void buildCraftingRecipes(@NotNull Consumer<FinishedRecipe> consumer) {
         ShapedRecipeBuilder.shaped(MineCordBlocks.MINE_CORD.get(), 1)
-                .pattern("SSS")
-                .pattern("SIS")
-                .pattern("SSS")
+                .pattern("LRL")
+                .pattern("ODS")
+                .pattern("LRL")
+                .define('L', Items.LAPIS_LAZULI)
+                .define('R', Items.REDSTONE)
+                .define('O', Items.OBSERVER)
+                .define('D', Items.DIAMOND)
                 .define('S', Items.STRING)
-                .define('I', Items.IRON_INGOT)
-                .unlockedBy("has_item", has(Items.STRING))
+                .unlockedBy("has_item", has(Items.DIAMOND))
                 .save(consumer, new ResourceLocation(MineCord.MOD_ID, "mine_cord"));
     }
 }

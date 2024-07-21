@@ -1,17 +1,26 @@
 {
   "type": "minecraft:crafting_shaped",
   "key": {
-    "I": {
-      "item": "minecraft:iron_ingot"
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "L": {
+      "item": "minecraft:lapis_lazuli"
+    },
+    "O": {
+      "item": "minecraft:observer"
+    },
+    "R": {
+      "item": "minecraft:redstone"
     },
     "S": {
       "item": "minecraft:string"
     }
   },
   "pattern": [
-    "SSS",
-    "SIS",
-    "SSS"
+    "LRL",
+    "ODS",
+    "LRL"
   ],
   "result": {
     "item": "minecord:mine_cord"

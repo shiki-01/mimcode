@@ -18,6 +18,8 @@ public class MineCord {
         modEventBus.addListener(this::registerProviders);
         MineCordBlocks.register(modEventBus);
         MineCordItems.register(modEventBus);
+        MineCordEvents.register(modEventBus);
+        MineCordContainer.register(modEventBus);
     }
 
     private void registerProviders(GatherDataEvent event) {
