@@ -11,22 +11,14 @@ import java.util.Map;
 public class MineCordBlockState implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
-    private final UUID id;
-    private transient BlockPos pos;
     private MineCordButtonState[][] states;
     private boolean signalState = false;
     private String message = "";
 
-    public MineCordBlockState(UUID id, BlockPos pos, MineCordButtonState[][] states, boolean signalState, String message) {
-        this.id = id;
-        this.pos = pos;
+    public MineCordBlockState(MineCordButtonState[][] states, boolean signalState, String message) {
         this.states = states;
         this.signalState = signalState;
         this.message = message;
-    }
-
-    public static MineCordBlockState getBlockState(UUID blockUUID) {
-        return new MineCordBlockState(blockUUID, new BlockPos(0, 0, 0), new MineCordButtonState[3][3], false, "");
     }
 
     public void codeBlockStatus(BlockPos blockPos, Map<BlockPos, MineCordBlockState> blockStates) {
@@ -124,25 +116,5 @@ public class MineCordBlockState implements Serializable {
 
     public void setSignalState(boolean signalState) {
         this.signalState = signalState;
-    }
-
-    public void setPos(BlockPos pos) {
-        this.pos = pos;
-    }
-
-    public void saveBlockState() {
-        Map<BlockPos, MineCordBlockState> blockStates;
-        try {
-            blockStates = MineCordBlockState.loadFromFile("blockStates.dat");
-        } catch (IOException | ClassNotFoundException e) {
-            blockStates = new HashMap<>();
-            MineCordLogger.logger.error("Failed to load block states", e);
-        }
-        blockStates.put(this.pos, this);
-        try {
-            MineCordBlockState.saveToFile(blockStates, "blockStates.dat");
-        } catch (IOException e) {
-            MineCordLogger.logger.error("Failed to save block states", e);
-        }
     }
 }
