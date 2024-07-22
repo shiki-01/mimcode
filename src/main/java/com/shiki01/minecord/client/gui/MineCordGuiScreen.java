@@ -3,9 +3,12 @@ package com.shiki01.minecord.client.gui;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.shiki01.minecord.MineCordContainer;
+import com.shiki01.minecord.util.MineCordBlockState;
+import com.shiki01.minecord.util.MineCordLogger;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -13,29 +16,45 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
-enum ButtonState {
-    INPUT, OUTPUT, DISABLED
-}
+import java.io.IOException;
+import java.util.Map;
 
 @OnlyIn(Dist.CLIENT)
 public class MineCordGuiScreen extends AbstractContainerScreen<MineCordContainer> {
     private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation("minecord", "textures/gui/background.png");
     private EditBox messageInput;
+    private String message = "";
     private boolean signalState = false;
-    private final ButtonState[][] buttonStates = new ButtonState[3][3];
+    private final MineCordButtonState[][] mineCordButtonStates = new MineCordButtonState[3][3];
 
     public MineCordGuiScreen(MineCordContainer container, Inventory inv, Component title) {
         super(container, inv, title);
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                buttonStates[i][j] = ButtonState.DISABLED;
-            }
+    }
+
+    @Override
+    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+        if (this.messageInput.isFocused()) {
+            return this.messageInput.keyPressed(keyCode, scanCode, modifiers);
+        } else {
+            return super.keyPressed(keyCode, scanCode, modifiers);
         }
     }
 
     @Override
     protected void init() {
         super.init();
+        this.clearWidgets();
+
+        Map<BlockPos, MineCordBlockState> blockStates = Map.of();
+        try {
+            blockStates = MineCordBlockState.loadFromFile("blockStates.dat");
+            if (!blockStates.isEmpty()) {
+                BlockPos BlockPos = blockStates.keySet().iterator().next();
+                MineCordBlockState BlockState = blockStates.get(BlockPos);
+            }
+        } catch (IOException e) {
+            MineCordLogger.logger.error("Failed to load block states", e);
+        }
         int startX = this.leftPos + 10;
         int startY = this.topPos + 30;
         int buttonSize = 20;
@@ -44,29 +63,29 @@ public class MineCordGuiScreen extends AbstractContainerScreen<MineCordContainer
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
                 final int r = row, c = col;
-                Button button = new Button(startX + (buttonSize + padding) * col, startY + (buttonSize + padding) * row, buttonSize, buttonSize, Component.literal(""), (b) -> {
-                    switch (buttonStates[r][c]) {
+                Button button = new Button(startX + (buttonSize + padding) * col, startY + (buttonSize + padding) * row, buttonSize, buttonSize, Component.literal(mineCordButtonStates[r][c].name()), b -> {
+                    switch (mineCordButtonStates[r][c]) {
                         case DISABLED:
-                            buttonStates[r][c] = ButtonState.INPUT;
+                            mineCordButtonStates[r][c] = MineCordButtonState.INPUT;
                             break;
                         case INPUT:
-                            buttonStates[r][c] = ButtonState.OUTPUT;
+                            mineCordButtonStates[r][c] = MineCordButtonState.OUTPUT;
                             break;
                         case OUTPUT:
-                            buttonStates[r][c] = ButtonState.DISABLED;
+                            mineCordButtonStates[r][c] = MineCordButtonState.DISABLED;
                             break;
                     }
-                    b.setMessage(Component.literal(buttonStates[r][c].name()));
+                    b.setMessage(Component.literal(mineCordButtonStates[r][c].name()));
                 }) {
                     @Override
                     public void renderButton(@NotNull PoseStack poseStack, int mouseX, int mouseY, float partialTicks) {
                         this.fillGradient(poseStack, this.x, this.y, this.x + this.width, this.y + this.height,
-                                switch (buttonStates[r][c]) {
+                                switch (mineCordButtonStates[r][c]) {
                                     case INPUT -> 0xFFFF0000;
                                     case OUTPUT -> 0xFF0000FF;
                                     default -> 0xFFC0C0C0;
                                 },
-                                switch (buttonStates[r][c]) {
+                                switch (mineCordButtonStates[r][c]) {
                                     case INPUT -> 0xFFFF0000;
                                     case OUTPUT -> 0xFF0000FF;
                                     default -> 0xFFC0C0C0;
@@ -78,17 +97,30 @@ public class MineCordGuiScreen extends AbstractContainerScreen<MineCordContainer
             }
         }
 
-        this.addRenderableWidget(new Button(this.leftPos + 120, this.topPos + 30, 50, 20, Component.literal("ON"), button -> {
+        this.addRenderableWidget(new Button(this.leftPos + 90, this.topPos + 30, 50, 20, Component.literal(signalState ? "ON" : "OFF"), button -> {
             signalState = !signalState;
             button.setMessage(Component.literal(signalState ? "ON" : "OFF"));
         }));
 
-        messageInput = new EditBox(this.font, this.leftPos + 10, this.topPos + 115, 160, 20, Component.literal(""));
+        messageInput = new EditBox(this.font, this.leftPos + 10, this.topPos + 115, 160, 20, Component.literal(message));
         messageInput.setMaxLength(100);
         this.addRenderableWidget(messageInput);
-        Button confirmButton = new Button(this.leftPos + 120, this.topPos + 140, 50, 20, Component.literal("Confirm"), button -> {
-        });
+
+        Button confirmButton = getButton(blockStates, this.menu.getBlockPos());
         this.addRenderableWidget(confirmButton);
+    }
+
+    private @NotNull Button getButton(Map<BlockPos, MineCordBlockState> blockStates, BlockPos currentBlockPos) {
+        return new Button(this.leftPos + 120, this.topPos + 140, 50, 20, Component.literal("Confirm"), button -> {
+            MineCordBlockState blockState = new MineCordBlockState(mineCordButtonStates);
+            blockState.setBlockPos(currentBlockPos);
+            blockStates.put(currentBlockPos, blockState);
+            try {
+                MineCordBlockState.saveToFile(blockStates, "blockStates.dat");
+            } catch (IOException e) {
+                MineCordLogger.logger.error("Failed to save block state", e);
+            }
+        });
     }
 
     @Override

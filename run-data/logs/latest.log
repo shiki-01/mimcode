@@ -1,29 +1,29 @@
-[227ŒŽ2024 10:13:32.313] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgedatauserdev, --assetIndex, 1.19, --assetsDir, C:\Users\kishi\.gradle\caches\forge_gradle\assets, --gameDir, ., --fml.forgeVersion, 43.4.0, --fml.mcVersion, 1.19.2, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20220805.130853, --mod, minecord, --all, --output, C:\Users\kishi\.aa_myfile\GitHub\minecord\src\generated\resources, --existing, C:\Users\kishi\.aa_myfile\GitHub\minecord\src\main\resources]
-[227ŒŽ2024 10:13:32.320] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.10 by Oracle Corporation; OS Windows 11 arch amd64 version 10.0
-[227ŒŽ2024 10:13:32.513] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/C:/Users/kishi/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%23126!/ Service=ModLauncher Env=CLIENT
-[227ŒŽ2024 10:13:32.818] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\kishi\.gradle\caches\modules-2\files-2.1\net.minecraftforge\javafmllanguage\1.19.2-43.4.0\2a7c572a7e3a470d7e6cc15e3a02eb8c1e9321bc\javafmllanguage-1.19.2-43.4.0.jar is missing mods.toml file
-[227ŒŽ2024 10:13:32.819] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\kishi\.gradle\caches\modules-2\files-2.1\net.minecraftforge\lowcodelanguage\1.19.2-43.4.0\bc0371d437577093930052ab00a6f0e910933a37\lowcodelanguage-1.19.2-43.4.0.jar is missing mods.toml file
-[227ŒŽ2024 10:13:32.823] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\kishi\.gradle\caches\modules-2\files-2.1\net.minecraftforge\mclanguage\1.19.2-43.4.0\463ccdc6c519611452d4ea97017881e1dce1af65\mclanguage-1.19.2-43.4.0.jar is missing mods.toml file
-[227ŒŽ2024 10:13:32.824] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\kishi\.gradle\caches\modules-2\files-2.1\net.minecraftforge\fmlcore\1.19.2-43.4.0\6ed7b29f63c0a041a2e47ad6ca1ec9cb89ddeaf9\fmlcore-1.19.2-43.4.0.jar is missing mods.toml file
-[227ŒŽ2024 10:13:32.876] [main/INFO] [net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator/]: No dependencies to load found. Skipping!
-[227ŒŽ2024 10:13:33.979] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgedatauserdev' with arguments [--gameDir, ., --assetsDir, C:\Users\kishi\.gradle\caches\forge_gradle\assets, --assetIndex, 1.19, --mod, minecord, --all, --output, C:\Users\kishi\.aa_myfile\GitHub\minecord\src\generated\resources, --existing, C:\Users\kishi\.aa_myfile\GitHub\minecord\src\main\resources]
-[227ŒŽ2024 10:13:34.313] [main/INFO] [net.minecraftforge.data.loading.DatagenModLoader/]: Initializing Data Gatherer for mods [minecord]
-[227ŒŽ2024 10:13:36.587] [main/INFO] [net.minecraft.util.datafix.DataFixers/]: Building unoptimized datafixer
-[227ŒŽ2024 10:13:37.556] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 43.4.0, for MC 1.19.2 with MCP 20220805.130853
-[227ŒŽ2024 10:13:37.559] [modloading-worker-0/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v43.4.0 Initialized
-[227ŒŽ2024 10:13:37.862] [main/WARN] [net.minecraft.server.packs.VanillaPackResources/]: Assets URL 'union:/C:/Users/kishi/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.19.2-43.4.0_mapped_official_1.19.2/forge-1.19.2-43.4.0_mapped_official_1.19.2.jar%23188!/assets/.mcassetsroot' uses unexpected schema
-[227ŒŽ2024 10:13:37.863] [main/WARN] [net.minecraft.server.packs.VanillaPackResources/]: Assets URL 'union:/C:/Users/kishi/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.19.2-43.4.0_mapped_official_1.19.2/forge-1.19.2-43.4.0_mapped_official_1.19.2.jar%23188!/data/.mcassetsroot' uses unexpected schema
-[227ŒŽ2024 10:13:38.234] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Block States: minecord
-[227ŒŽ2024 10:13:38.282] [main/INFO] [net.minecraft.data.DataGenerator/]: Block States: minecord finished after 46 ms
-[227ŒŽ2024 10:13:38.282] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Block Models: minecord
-[227ŒŽ2024 10:13:38.287] [main/INFO] [net.minecraft.data.DataGenerator/]: Block Models: minecord finished after 5 ms
-[227ŒŽ2024 10:13:38.287] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Item Models: minecord
-[227ŒŽ2024 10:13:38.288] [main/INFO] [net.minecraft.data.DataGenerator/]: Item Models: minecord finished after 0 ms
-[227ŒŽ2024 10:13:38.288] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Recipes
-[227ŒŽ2024 10:13:38.309] [main/INFO] [net.minecraft.data.DataGenerator/]: Recipes finished after 21 ms
-[227ŒŽ2024 10:13:38.310] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Languages: en_us
-[227ŒŽ2024 10:13:38.310] [main/INFO] [net.minecraft.data.DataGenerator/]: Languages: en_us finished after 0 ms
-[227ŒŽ2024 10:13:38.311] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Languages: ja_jp
-[227ŒŽ2024 10:13:38.311] [main/INFO] [net.minecraft.data.DataGenerator/]: Languages: ja_jp finished after 0 ms
-[227ŒŽ2024 10:13:38.311] [main/INFO] [net.minecraft.data.DataGenerator/]: All providers took: 77 ms
-[227ŒŽ2024 10:13:38.319] [main/INFO] [net.minecraft.data.HashCache/]: Caching: total files: 7, old count: 8, new count: 8, removed stale: 0, written: 0
+[227ŒŽ2024 11:10:33.873] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgedatauserdev, --assetIndex, 1.19, --assetsDir, C:\Users\kishi\.gradle\caches\forge_gradle\assets, --gameDir, ., --fml.forgeVersion, 43.4.0, --fml.mcVersion, 1.19.2, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20220805.130853, --mod, minecord, --all, --output, C:\Users\kishi\.aa_myfile\GitHub\minecord\src\generated\resources, --existing, C:\Users\kishi\.aa_myfile\GitHub\minecord\src\main\resources]
+[227ŒŽ2024 11:10:33.880] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.10 by Oracle Corporation; OS Windows 11 arch amd64 version 10.0
+[227ŒŽ2024 11:10:34.051] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/C:/Users/kishi/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%23126!/ Service=ModLauncher Env=CLIENT
+[227ŒŽ2024 11:10:34.376] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\kishi\.gradle\caches\modules-2\files-2.1\net.minecraftforge\javafmllanguage\1.19.2-43.4.0\2a7c572a7e3a470d7e6cc15e3a02eb8c1e9321bc\javafmllanguage-1.19.2-43.4.0.jar is missing mods.toml file
+[227ŒŽ2024 11:10:34.379] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\kishi\.gradle\caches\modules-2\files-2.1\net.minecraftforge\lowcodelanguage\1.19.2-43.4.0\bc0371d437577093930052ab00a6f0e910933a37\lowcodelanguage-1.19.2-43.4.0.jar is missing mods.toml file
+[227ŒŽ2024 11:10:34.382] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\kishi\.gradle\caches\modules-2\files-2.1\net.minecraftforge\mclanguage\1.19.2-43.4.0\463ccdc6c519611452d4ea97017881e1dce1af65\mclanguage-1.19.2-43.4.0.jar is missing mods.toml file
+[227ŒŽ2024 11:10:34.384] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\kishi\.gradle\caches\modules-2\files-2.1\net.minecraftforge\fmlcore\1.19.2-43.4.0\6ed7b29f63c0a041a2e47ad6ca1ec9cb89ddeaf9\fmlcore-1.19.2-43.4.0.jar is missing mods.toml file
+[227ŒŽ2024 11:10:34.452] [main/INFO] [net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator/]: No dependencies to load found. Skipping!
+[227ŒŽ2024 11:10:35.689] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgedatauserdev' with arguments [--gameDir, ., --assetsDir, C:\Users\kishi\.gradle\caches\forge_gradle\assets, --assetIndex, 1.19, --mod, minecord, --all, --output, C:\Users\kishi\.aa_myfile\GitHub\minecord\src\generated\resources, --existing, C:\Users\kishi\.aa_myfile\GitHub\minecord\src\main\resources]
+[227ŒŽ2024 11:10:36.084] [main/INFO] [net.minecraftforge.data.loading.DatagenModLoader/]: Initializing Data Gatherer for mods [minecord]
+[227ŒŽ2024 11:10:38.562] [main/INFO] [net.minecraft.util.datafix.DataFixers/]: Building unoptimized datafixer
+[227ŒŽ2024 11:10:39.525] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 43.4.0, for MC 1.19.2 with MCP 20220805.130853
+[227ŒŽ2024 11:10:39.530] [modloading-worker-0/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v43.4.0 Initialized
+[227ŒŽ2024 11:10:39.865] [main/WARN] [net.minecraft.server.packs.VanillaPackResources/]: Assets URL 'union:/C:/Users/kishi/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.19.2-43.4.0_mapped_official_1.19.2/forge-1.19.2-43.4.0_mapped_official_1.19.2.jar%23188!/assets/.mcassetsroot' uses unexpected schema
+[227ŒŽ2024 11:10:39.865] [main/WARN] [net.minecraft.server.packs.VanillaPackResources/]: Assets URL 'union:/C:/Users/kishi/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.19.2-43.4.0_mapped_official_1.19.2/forge-1.19.2-43.4.0_mapped_official_1.19.2.jar%23188!/data/.mcassetsroot' uses unexpected schema
+[227ŒŽ2024 11:10:40.253] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Block States: minecord
+[227ŒŽ2024 11:10:40.330] [main/INFO] [net.minecraft.data.DataGenerator/]: Block States: minecord finished after 75 ms
+[227ŒŽ2024 11:10:40.331] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Block Models: minecord
+[227ŒŽ2024 11:10:40.334] [main/INFO] [net.minecraft.data.DataGenerator/]: Block Models: minecord finished after 3 ms
+[227ŒŽ2024 11:10:40.335] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Item Models: minecord
+[227ŒŽ2024 11:10:40.336] [main/INFO] [net.minecraft.data.DataGenerator/]: Item Models: minecord finished after 1 ms
+[227ŒŽ2024 11:10:40.336] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Recipes
+[227ŒŽ2024 11:10:40.385] [main/INFO] [net.minecraft.data.DataGenerator/]: Recipes finished after 49 ms
+[227ŒŽ2024 11:10:40.386] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Languages: en_us
+[227ŒŽ2024 11:10:40.387] [main/INFO] [net.minecraft.data.DataGenerator/]: Languages: en_us finished after 0 ms
+[227ŒŽ2024 11:10:40.387] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Languages: ja_jp
+[227ŒŽ2024 11:10:40.388] [main/INFO] [net.minecraft.data.DataGenerator/]: Languages: ja_jp finished after 0 ms
+[227ŒŽ2024 11:10:40.388] [main/INFO] [net.minecraft.data.DataGenerator/]: All providers took: 134 ms
+[227ŒŽ2024 11:10:40.402] [main/INFO] [net.minecraft.data.HashCache/]: Caching: total files: 7, old count: 8, new count: 8, removed stale: 0, written: 0
