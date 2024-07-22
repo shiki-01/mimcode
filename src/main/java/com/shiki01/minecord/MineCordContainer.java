@@ -33,18 +33,6 @@ public class MineCordContainer extends AbstractContainerMenu {
     public MineCordContainer(int id, Level level, BlockPos pos, Inventory playerInventory, Player player) {
         super(MINE_CORD_CONTAINER.get(), id);
 
-        ItemStackHandler itemStackHandler = new ItemStackHandler(1);
-        this.addSlot(new SlotItemHandler(itemStackHandler, 0, 64, 24));
-
-        for (int i = 0; i < 3; ++i) {
-            for (int j = 0; j < 9; ++j) {
-                this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
-            }
-        }
-
-        for (int k = 0; k < 9; ++k) {
-            this.addSlot(new Slot(playerInventory, k, 8 + k * 18, 142));
-        }
     }
 
     @Override
@@ -53,7 +41,7 @@ public class MineCordContainer extends AbstractContainerMenu {
     }
 
     @Override
-    public @NotNull ItemStack quickMoveStack(Player player, int index) {
+    public @NotNull ItemStack quickMoveStack(@NotNull Player player, int index) {
         return ItemStack.EMPTY;
     }
 }
