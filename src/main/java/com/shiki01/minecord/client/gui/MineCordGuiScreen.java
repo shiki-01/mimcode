@@ -56,7 +56,7 @@ public class MineCordGuiScreen extends AbstractContainerScreen<MineCordContainer
 
         BlockPos currentBlockPos = this.menu.getBlockPos();
 
-        MineCordBlockState currentBlockState = blockStates.getOrDefault(currentBlockPos, new MineCordBlockState(new MineCordButtonState[3][3]));
+        MineCordBlockState currentBlockState = new MineCordBlockState(mineCordButtonStates, signalState, message);
         currentBlockState.codeBlockStatus(currentBlockPos, blockStates);
 
         this.message = currentBlockState.getMessage();
@@ -119,20 +119,20 @@ public class MineCordGuiScreen extends AbstractContainerScreen<MineCordContainer
             button.setMessage(Component.literal(signalState ? "ON" : "OFF"));
         }));
 
-        messageInput = new EditBox(this.font, this.leftPos + 10, this.topPos + 115, 160, 20, Component.literal(message));
+        messageInput = new EditBox(this.font, this.leftPos + 10, this.topPos + 115, 160, 20, Component.literal(""));
+        messageInput.setValue(this.message);
         messageInput.setMaxLength(100);
         this.addRenderableWidget(messageInput);
     }
 
     private @NotNull Button getButton(Map<BlockPos, MineCordBlockState> blockStates, BlockPos currentBlockPos) {
         return new Button(this.leftPos + 120, this.topPos + 140, 50, 20, Component.literal("Confirm"), button -> {
-            MineCordBlockState blockState = blockStates.getOrDefault(currentBlockPos, new MineCordBlockState(mineCordButtonStates));
-            blockState.setBlockPos(currentBlockPos);
-            blockStates.put(currentBlockPos, blockState);
+            MineCordBlockState currentBlockState = new MineCordBlockState(mineCordButtonStates, signalState, messageInput.getValue());
+            blockStates.put(currentBlockPos, currentBlockState);
             try {
                 MineCordBlockState.saveToFile(blockStates, "blockStates.dat");
             } catch (IOException e) {
-                MineCordLogger.logger.error("Failed to save block state", e);
+                MineCordLogger.logger.error("Failed to save block states", e);
             }
         });
     }

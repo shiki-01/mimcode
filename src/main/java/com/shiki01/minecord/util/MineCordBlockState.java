@@ -3,6 +3,7 @@ package com.shiki01.minecord.util;
 import com.shiki01.minecord.client.gui.MineCordButtonState;
 import net.minecraft.core.BlockPos;
 import java.io.*;
+import java.util.UUID;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,9 +11,23 @@ import java.util.Map;
 public class MineCordBlockState implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
+    private final UUID id;
+    private transient BlockPos pos;
     private MineCordButtonState[][] states;
     private boolean signalState = false;
     private String message = "";
+
+    public MineCordBlockState(UUID id, BlockPos pos, MineCordButtonState[][] states, boolean signalState, String message) {
+        this.id = id;
+        this.pos = pos;
+        this.states = states;
+        this.signalState = signalState;
+        this.message = message;
+    }
+
+    public static MineCordBlockState getBlockState(UUID blockUUID) {
+        return new MineCordBlockState(blockUUID, new BlockPos(0, 0, 0), new MineCordButtonState[3][3], false, "");
+    }
 
     public void codeBlockStatus(BlockPos blockPos, Map<BlockPos, MineCordBlockState> blockStates) {
         MineCordBlockState state = blockStates.get(blockPos);
@@ -30,18 +45,23 @@ public class MineCordBlockState implements Serializable {
         }
     }
 
-    public MineCordBlockState(MineCordButtonState[][] states) {
-        this.states = states;
-    }
-
     public static void saveToFile(Map<BlockPos, MineCordBlockState> blockStates, String filePath) throws IOException {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filePath))) {
-            out.writeObject(blockStates.size());
+            out.writeInt(blockStates.size());
             for (Map.Entry<BlockPos, MineCordBlockState> entry : blockStates.entrySet()) {
                 out.writeInt(entry.getKey().getX());
                 out.writeInt(entry.getKey().getY());
                 out.writeInt(entry.getKey().getZ());
-                out.writeObject(entry.getValue());
+                MineCordBlockState state = entry.getValue();
+                out.writeBoolean(state.getSignalState());
+                out.writeObject(state.getMessage());
+                MineCordButtonState[][] states = state.getStates();
+                out.writeInt(states.length);
+                for (MineCordButtonState[] row : states) {
+                    for (MineCordButtonState cell : row) {
+                        out.writeInt(cell.ordinal());
+                    }
+                }
             }
         }
     }
@@ -52,30 +72,38 @@ public class MineCordBlockState implements Serializable {
             MineCordLogger.logger.error("File does not exist or is empty");
             return new HashMap<>();
         }
-        
-        MineCordLogger.logger.info(String.valueOf(file));
 
         try (FileInputStream fis = new FileInputStream(file);
              ObjectInputStream ois = new ObjectInputStream(fis)) {
-            int size = ois.readInt();
-            Map<BlockPos, MineCordBlockState> blockStates = new HashMap<>();
-            for (int i = 0; i < size; i++) {
+            int mapSize = ois.readInt();
+            Map<BlockPos, MineCordBlockState> blockStates = new HashMap<>(mapSize);
+            for (int i = 0; i < mapSize; i++) {
                 int x = ois.readInt();
                 int y = ois.readInt();
                 int z = ois.readInt();
                 BlockPos pos = new BlockPos(x, y, z);
-                MineCordBlockState state = (MineCordBlockState) ois.readObject();
+                boolean signalState = ois.readBoolean();
+                String message = (String) ois.readObject();
+                int statesLength = ois.readInt();
+                MineCordButtonState[][] states = new MineCordButtonState[statesLength][statesLength];
+                for (int j = 0; j < statesLength; j++) {
+                    for (int k = 0; k < statesLength; k++) {
+                        states[j][k] = MineCordButtonState.values()[ois.readInt()];
+                    }
+                }
+                MineCordBlockState state = new MineCordBlockState(states, signalState, message);
+                state.setSignalState(signalState);
+                state.setMessage(message);
                 blockStates.put(pos, state);
             }
-            MineCordLogger.logger.info(blockStates.toString());
             return blockStates;
+        } catch (EOFException e) {
+            MineCordLogger.logger.error("Reached end of file unexpectedly", e);
+            return new HashMap<>();
         } catch (IOException | ClassNotFoundException e) {
             MineCordLogger.logger.error("Failed to load block states", e);
             return new HashMap<>();
         }
-    }
-
-    public void setBlockPos(BlockPos blockPos) {
     }
 
     public String getMessage() {
@@ -88,5 +116,33 @@ public class MineCordBlockState implements Serializable {
 
     public boolean getSignalState() {
         return signalState;
+    }
+
+    public void setMessage(String value) {
+        this.message = value;
+    }
+
+    public void setSignalState(boolean signalState) {
+        this.signalState = signalState;
+    }
+
+    public void setPos(BlockPos pos) {
+        this.pos = pos;
+    }
+
+    public void saveBlockState() {
+        Map<BlockPos, MineCordBlockState> blockStates;
+        try {
+            blockStates = MineCordBlockState.loadFromFile("blockStates.dat");
+        } catch (IOException | ClassNotFoundException e) {
+            blockStates = new HashMap<>();
+            MineCordLogger.logger.error("Failed to load block states", e);
+        }
+        blockStates.put(this.pos, this);
+        try {
+            MineCordBlockState.saveToFile(blockStates, "blockStates.dat");
+        } catch (IOException e) {
+            MineCordLogger.logger.error("Failed to save block states", e);
+        }
     }
 }
