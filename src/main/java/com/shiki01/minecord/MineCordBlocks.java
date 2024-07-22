@@ -1,25 +1,18 @@
 package com.shiki01.minecord;
 
-import com.shiki01.minecord.client.gui.MineCordButtonState;
 import com.shiki01.minecord.util.MineCordBlockState;
+import com.shiki01.minecord.util.MineCordGUIOpener;
 import com.shiki01.minecord.util.MineCordLogger;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.SimpleMenuProvider;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -27,10 +20,8 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.storage.loot.LootContext;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -39,10 +30,6 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.util.*;
 
-import net.minecraft.world.phys.AABB;
-import org.jetbrains.annotations.Nullable;
-
-import static net.minecraftforge.network.NetworkHooks.*;
 
 public class MineCordBlocks {
     private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MineCord.MOD_ID);
@@ -109,10 +96,7 @@ class MineCordBlock extends Block {
     @SuppressWarnings("deprecation")
     public @NotNull InteractionResult use(@NotNull BlockState state, Level world, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
         if (!world.isClientSide && player instanceof ServerPlayer) {
-            openScreen((ServerPlayer) player, new SimpleMenuProvider(
-                            (windowId, inv, playerEntity) -> new MineCordContainer(windowId, world, pos, inv, playerEntity),
-                            Component.literal("Mine Cord GUI")),
-                    (buffer) -> buffer.writeBlockPos(pos));
+            MineCordGUIOpener.openCustomGui((ServerPlayer) player, world, pos);
             return InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS;

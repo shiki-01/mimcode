@@ -29,7 +29,7 @@ public class MineCordEvents {
     public static void onClientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             MINECORD_TAB.setRecipeFolderName("minecord");
-            MenuScreens.register(MineCordContainer.MINE_CORD_CONTAINER.get(), MineCordGuiScreen::new);
+
         });
     }
 }
