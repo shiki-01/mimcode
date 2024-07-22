@@ -16,6 +16,8 @@ import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 
 public class MineCordContainer extends AbstractContainerMenu {
+    private final BlockPos blockPos;
+
     public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.MENU_TYPES, "minecord");
     public static final RegistryObject<MenuType<MineCordContainer>> MINE_CORD_CONTAINER = CONTAINERS.register("mine_cord_container", () -> IForgeMenuType.create((windowId, inv, data) -> {
         FriendlyByteBuf buf = new FriendlyByteBuf(data);
@@ -29,7 +31,7 @@ public class MineCordContainer extends AbstractContainerMenu {
 
     public MineCordContainer(int id, Level level, BlockPos pos, Inventory playerInventory, Player player) {
         super(MINE_CORD_CONTAINER.get(), id);
-
+        this.blockPos = pos;
     }
 
     @Override
@@ -40,5 +42,9 @@ public class MineCordContainer extends AbstractContainerMenu {
     @Override
     public @NotNull ItemStack quickMoveStack(@NotNull Player player, int index) {
         return ItemStack.EMPTY;
+    }
+
+    public BlockPos getBlockPos() {
+        return blockPos;
     }
 }

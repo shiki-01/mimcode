@@ -17,6 +17,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 @OnlyIn(Dist.CLIENT)
@@ -25,7 +26,7 @@ public class MineCordGuiScreen extends AbstractContainerScreen<MineCordContainer
     private EditBox messageInput;
     private String message = "";
     private boolean signalState = false;
-    private final MineCordButtonState[][] mineCordButtonStates = new MineCordButtonState[3][3];
+    private MineCordButtonState[][] mineCordButtonStates = new MineCordButtonState[3][3];
 
     public MineCordGuiScreen(MineCordContainer container, Inventory inv, Component title) {
         super(container, inv, title);
@@ -45,16 +46,32 @@ public class MineCordGuiScreen extends AbstractContainerScreen<MineCordContainer
         super.init();
         this.clearWidgets();
 
-        Map<BlockPos, MineCordBlockState> blockStates = Map.of();
+        Map<BlockPos, MineCordBlockState> blockStates;
         try {
             blockStates = MineCordBlockState.loadFromFile("blockStates.dat");
-            if (!blockStates.isEmpty()) {
-                BlockPos BlockPos = blockStates.keySet().iterator().next();
-                MineCordBlockState BlockState = blockStates.get(BlockPos);
-            }
-        } catch (IOException e) {
+        } catch (IOException | ClassNotFoundException e) {
+            blockStates = new HashMap<>();
             MineCordLogger.logger.error("Failed to load block states", e);
         }
+
+        BlockPos currentBlockPos = this.menu.getBlockPos();
+
+        MineCordBlockState currentBlockState = blockStates.getOrDefault(currentBlockPos, new MineCordBlockState(new MineCordButtonState[3][3]));
+        currentBlockState.codeBlockStatus(currentBlockPos, blockStates);
+
+        this.message = currentBlockState.getMessage();
+        this.mineCordButtonStates = currentBlockState.getStates();
+        this.signalState = currentBlockState.getSignalState();
+
+        initializeGuiComponents();
+
+        BlockPos blockPos = this.menu.getBlockPos();
+
+        Button confirmButton = getButton(blockStates, blockPos);
+        this.addRenderableWidget(confirmButton);
+    }
+
+    private void initializeGuiComponents() {
         int startX = this.leftPos + 10;
         int startY = this.topPos + 30;
         int buttonSize = 20;
@@ -105,14 +122,11 @@ public class MineCordGuiScreen extends AbstractContainerScreen<MineCordContainer
         messageInput = new EditBox(this.font, this.leftPos + 10, this.topPos + 115, 160, 20, Component.literal(message));
         messageInput.setMaxLength(100);
         this.addRenderableWidget(messageInput);
-
-        Button confirmButton = getButton(blockStates, this.menu.getBlockPos());
-        this.addRenderableWidget(confirmButton);
     }
 
     private @NotNull Button getButton(Map<BlockPos, MineCordBlockState> blockStates, BlockPos currentBlockPos) {
         return new Button(this.leftPos + 120, this.topPos + 140, 50, 20, Component.literal("Confirm"), button -> {
-            MineCordBlockState blockState = new MineCordBlockState(mineCordButtonStates);
+            MineCordBlockState blockState = blockStates.getOrDefault(currentBlockPos, new MineCordBlockState(mineCordButtonStates));
             blockState.setBlockPos(currentBlockPos);
             blockStates.put(currentBlockPos, blockState);
             try {
